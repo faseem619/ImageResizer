@@ -1,11 +1,11 @@
 .button--select-file {
-  padding: 1.2em;
-  background-color: var(--font-color-accent);
+  padding: 1em 3em;
+  background-color: var(--font-color-primary);
   color: var(--background-color-primary);
   /* font-family: var(--font-primary); */
-  border-radius: 15px;
+  border-radius: 4px;
 }
 .button:hover {
   cursor: pointer;
-  background-color: #582396;
+  opacity: 0.9;
 }
