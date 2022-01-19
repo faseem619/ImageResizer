@@ -23,3 +23,11 @@
   font-size: var(--fs-h1);
   color: var(--border-color);
 }
+.drag_area--active {
+  background-color: #b3ecff;
+}
+
+.preview-image {
+  width: 100px;
+  max-height: 130px;
+}
