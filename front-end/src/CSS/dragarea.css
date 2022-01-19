@@ -1,0 +1,11 @@
+.drag_area--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5em;
+}
+.drag_area {
+  border: 3px dashed var(--border-color);
+  width: 70%;
+  height: 400px;
+}

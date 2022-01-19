@@ -1,0 +1,17 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --font-primary: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  --background-color-primary: #f9fafa;
+  --background-color-secondary: #93ffd8;
+  --border-color: #aaaaaa;
+}
+body {
+  background-color: var(--background-color-primary);
+}
