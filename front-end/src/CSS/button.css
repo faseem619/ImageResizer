@@ -1,0 +1,11 @@
+.button--select-file {
+  padding: 1.2em;
+  background-color: var(--font-color-accent);
+  color: var(--background-color-primary);
+  /* font-family: var(--font-primary); */
+  border-radius: 15px;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #582396;
+}

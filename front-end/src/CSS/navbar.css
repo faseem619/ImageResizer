@@ -1,9 +1,4 @@
 .navbar {
-  --font-color-primary: #548cff;
-
-  --fs-h1: 3rem;
-  --fs-p: 1.5rem;
-
   background-color: var(--background-color-secondary);
   display: flex;
   justify-content: space-between;

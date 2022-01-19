@@ -8,4 +8,18 @@
   border: 3px dashed var(--border-color);
   width: 70%;
   height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1em;
+  background-color: var(--background-color-accent);
+}
+.drag_area p {
+  color: var(--border-color);
+  font-size: var(--fs-p);
+}
+.drag_area i {
+  font-size: var(--fs-h1);
+  color: var(--border-color);
 }
