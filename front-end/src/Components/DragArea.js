@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import "../CSS/dragarea.css";
 import SelectButton from "./SelectButton";
+
 function DragArea() {
   const dragArea = useRef(null);
 
@@ -27,11 +29,26 @@ function DragArea() {
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = function () {
-        console.log(reader.result);
         setImages([...images, reader.result]);
       };
+      const PostImage = async (data = {}) => {
+        await fetch("http://localhost:8080", {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          body: data, // body data type must match "Content-Type" header
+        });
+      };
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("width", 100);
+      formData.append("height", 200);
+      PostImage(formData);
+      setFile("");
     }
-    setFile("");
   }, [file, images]);
 
   return (

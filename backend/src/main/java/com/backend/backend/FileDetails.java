@@ -1,9 +1,16 @@
 package com.backend.backend;
 
-import java.io.File;
 
-public class FileDetails {
-    File image;
+
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.springframework.web.multipart.MultipartFile;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class FileDetails implements Serializable{
+    MultipartFile image;
     int width;
     int height;
 
@@ -11,7 +18,7 @@ public class FileDetails {
     }
     
 
-    public FileDetails(File image, int width, int height) {
+    public FileDetails(MultipartFile image, int width, int height) {
         this.image = image;
         this.width = width;
         this.height = height;
@@ -26,11 +33,11 @@ public class FileDetails {
                 "}";
         }
 
-    public File getImage() {
+    public MultipartFile getImage() {
         return this.image;
     }
 
-    public void setImage(File image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
     }
 
