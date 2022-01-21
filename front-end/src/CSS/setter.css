@@ -1,0 +1,48 @@
+.setter_container {
+  display: grid;
+  place-items: center;
+  margin-top: 1rem;
+}
+.setter {
+  border: solid var(--background-color-secondary) 5px;
+  border-left-width: 20px;
+  width: 50%;
+  padding: 2em;
+}
+.setter h1 {
+  font-size: var(--fs-p);
+  font-family: var(--font-primary);
+  color: var(--font-color-primary);
+  text-align: left;
+}
+.setter--form {
+  margin-top: 2em;
+  display: flex;
+  column-gap: 7%;
+}
+.setter--form input {
+  padding: 10px;
+  outline: none;
+  border: solid var(--border-color) 1px;
+  -moz-appearance: textfield;
+}
+.setter--form input:focus {
+  border-color: var(--font-color-accent);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+button {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+}
+.submit_button {
+  background-color: var(--font-color-primary);
+  font-family: var(--font-primary);
+  color: var(--background-color-primary);
+  padding: 0.5em;
+  border-radius: 4px;
+}
