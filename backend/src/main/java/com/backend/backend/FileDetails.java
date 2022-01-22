@@ -1,16 +1,28 @@
 package com.backend.backend;
 
-
-
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FileDetails implements Serializable{
-    MultipartFile image;
+@Entity
+@Table
+public class FileDetails{
+
+    @Id
+    @GeneratedValue(
+        strategy  =GenerationType.AUTO
+    ) 
+    Long id;
+    File image;
     int width;
     int height;
 
@@ -18,7 +30,13 @@ public class FileDetails implements Serializable{
     }
     
 
-    public FileDetails(MultipartFile image, int width, int height) {
+    public FileDetails(File image, int width, int height) {
+        this.image = image;
+        this.width = width;
+        this.height = height;
+    }
+    public FileDetails(Long id,File image, int width, int height) {
+        this.id = id;
         this.image = image;
         this.width = width;
         this.height = height;
@@ -33,11 +51,20 @@ public class FileDetails implements Serializable{
                 "}";
         }
 
-    public MultipartFile getImage() {
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public File getImage() {
         return this.image;
     }
 
-    public void setImage(MultipartFile image) {
+    public void setImage(File image) {
         this.image = image;
     }
 
@@ -56,4 +83,5 @@ public class FileDetails implements Serializable{
     public void setHeight(int height) {
         this.height = height;
     }
+   
 }
