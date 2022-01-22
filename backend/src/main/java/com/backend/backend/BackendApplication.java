@@ -23,7 +23,7 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 	@PostMapping()
-	public String GetFile(@RequestParam("image") MultipartFile image,@RequestParam("height") int width,@RequestParam("height") int height){
+	public String GetFile(@RequestParam("image") MultipartFile image,@RequestParam("width") int width,@RequestParam("height") int height){
 		
 		FileDetails temp =new FileDetails(image,width,height);
 		log.info(temp.toString());

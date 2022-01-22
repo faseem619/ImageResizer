@@ -3,10 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import "../CSS/dragarea.css";
 import SelectButton from "./SelectButton";
 
-function DragArea({ height, width }) {
+function DragArea({ height, width, setFile, file }) {
   const dragArea = useRef(null);
 
-  let [file, setFile] = useState("");
   let [images, setImages] = useState([]);
 
   const handleDrop = (e) => {
@@ -31,25 +30,8 @@ function DragArea({ height, width }) {
       reader.onload = function () {
         setImages([...images, reader.result]);
       };
-      // const PostImage = async (data = {}) => {
-      //   await fetch("http://localhost:8080", {
-      //     method: "POST",
-      //     mode: "cors",
-      //     cache: "no-cache",
-      //     credentials: "same-origin",
-      //     redirect: "follow",
-      //     referrerPolicy: "no-referrer",
-      //     body: data,
-      //   });
-      // };
-      // const formData = new FormData();
-      // formData.append("image", file);
-      // formData.append("width", 100);
-      // formData.append("height", 200);
-      // PostImage(formData);
-      setFile("");
     }
-  }, [file, images]);
+  }, [file]);
 
   return (
     <div className="drag_area--container">

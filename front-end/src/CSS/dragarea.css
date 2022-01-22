@@ -31,3 +31,8 @@
   width: 100px;
   max-height: 130px;
 }
+@media (max-width: 800px) {
+  .drag_area {
+    width: 95%;
+  }
+}

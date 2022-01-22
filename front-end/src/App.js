@@ -7,11 +7,18 @@ import Navbar from "./Components/Navbar";
 function App() {
   const [height, setHeight] = useState("");
   const [width, setWidth] = useState("");
+  const [file, setFile] = useState("");
   return (
     <div className="App">
       <Navbar />
-      <DragArea width={width} height={height} />
-      <DimensionSetter setHeight={setHeight} setWidth={setWidth} />
+      <DragArea width={width} height={height} setFile={setFile} file={file} />
+      <DimensionSetter
+        setHeight={setHeight}
+        setWidth={setWidth}
+        file={file}
+        width={width}
+        height={height}
+      />
       hello world
     </div>
   );
