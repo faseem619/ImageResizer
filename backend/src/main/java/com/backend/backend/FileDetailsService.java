@@ -15,6 +15,12 @@ public class FileDetailsService {
     public void saveFile(FileDetails fileDetails){
         fileDetailsRepository.save(fileDetails);
     }
+    public FileDetails GetFile(String id){
+       return fileDetailsRepository.getById(id);
+    }
+    public boolean checkIfExist(String id){
+        return fileDetailsRepository.findById(id).isPresent();
+    }
 
     
 }

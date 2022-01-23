@@ -5,6 +5,10 @@ package com.backend.backend;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import java.awt.*;
+
 // import org.slf4j.Logger;
 // import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,15 +44,34 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 	@PostMapping()
-	public String GetFile(@RequestParam("image") MultipartFile image,@RequestParam("width") int width,@RequestParam("height") int height, @RequestParam("id") String id) throws IllegalStateException, IOException{
+	public String PostFile(@RequestParam("image") MultipartFile image,@RequestParam("width") int width,@RequestParam("height") int height, @RequestParam("id") String id) throws IllegalStateException, IOException{
 		
 		FileDetails temp =new FileDetails(id,multipartToFile(image,"tempimage"),width,height);
-		fileDetailsService.saveFile(temp);
-		
-
-
+		if(!fileDetailsService.checkIfExist(id))
+			fileDetailsService.saveFile(temp);
 		return  "success";
 
+	}
+
+	@GetMapping(value = "/{id}")
+	public Image GetFile(@PathVariable("id") String id){
+		FileDetails fileDetails=null;
+		if(fileDetailsService.checkIfExist(id))
+			fileDetails = fileDetailsService.GetFile(id);
+		Image image=null;
+		Image compressedImage =null;
+
+		try {
+			 image = ImageIO.read(fileDetails.image);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally{
+
+			compressedImage = image.getScaledInstance(fileDetails.width,fileDetails.height,Image.SCALE_SMOOTH);
+		}
+
+		return compressedImage;
 	}
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
