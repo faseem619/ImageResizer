@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "../CSS/dragarea.css";
 import SelectButton from "./SelectButton";
 
-function DragArea({ height, width, setFile, file }) {
+function DragArea({ setHeight, setWidth, setFile, file }) {
   const dragArea = useRef(null);
 
   let [images, setImages] = useState([]);
@@ -29,6 +29,12 @@ function DragArea({ height, width, setFile, file }) {
       reader.readAsDataURL(file);
       reader.onload = function () {
         setImages([...images, reader.result]);
+        let image = new Image();
+        image.src = reader.result;
+        image.onload = () => {
+          setWidth(image.width);
+          setHeight(image.height);
+        };
       };
     }
   }, [file]);

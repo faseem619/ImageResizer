@@ -11,7 +11,12 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <DragArea width={width} height={height} setFile={setFile} file={file} />
+      <DragArea
+        setWidth={setWidth}
+        setHeight={setHeight}
+        setFile={setFile}
+        file={file}
+      />
       <DimensionSetter
         setHeight={setHeight}
         setWidth={setWidth}
