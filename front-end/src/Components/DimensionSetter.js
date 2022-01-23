@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { PostImage } from "../ApiOperations";
 
 import "../CSS/setter.css";
@@ -11,6 +12,7 @@ function DimensionSetter({ setHeight, setWidth, file, width, height }) {
       formData.append("image", file);
       formData.append("height", height);
       formData.append("width", width);
+      formData.append("id", uuidv4());
       PostImage(formData);
     }
   };

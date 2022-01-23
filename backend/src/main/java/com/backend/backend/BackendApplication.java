@@ -38,9 +38,9 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 	@PostMapping()
-	public String GetFile(@RequestParam("image") MultipartFile image,@RequestParam("width") int width,@RequestParam("height") int height) throws IllegalStateException, IOException{
+	public String GetFile(@RequestParam("image") MultipartFile image,@RequestParam("width") int width,@RequestParam("height") int height, @RequestParam("id") String id) throws IllegalStateException, IOException{
 		
-		FileDetails temp =new FileDetails(multipartToFile(image,"tempimage"),width,height);
+		FileDetails temp =new FileDetails(id,multipartToFile(image,"tempimage"),width,height);
 		fileDetailsService.saveFile(temp);
 		
 

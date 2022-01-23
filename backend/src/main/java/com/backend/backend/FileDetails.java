@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.File;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,10 +18,7 @@ import javax.persistence.Table;
 public class FileDetails{
 
     @Id
-    @GeneratedValue(
-        strategy  =GenerationType.AUTO
-    ) 
-    Long id;
+    String id;
     File image;
     int width;
     int height;
@@ -35,7 +32,7 @@ public class FileDetails{
         this.width = width;
         this.height = height;
     }
-    public FileDetails(Long id,File image, int width, int height) {
+    public FileDetails(String id,File image, int width, int height) {
         this.id = id;
         this.image = image;
         this.width = width;
@@ -52,11 +49,11 @@ public class FileDetails{
         }
 
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

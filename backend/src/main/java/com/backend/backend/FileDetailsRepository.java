@@ -4,6 +4,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface FileDetailsRepository extends JpaRepository<FileDetails,Long> {
+public interface FileDetailsRepository extends JpaRepository<FileDetails,String> {
     
 }
