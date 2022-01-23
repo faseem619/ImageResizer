@@ -1,18 +1,17 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 import { PostImage } from "../ApiOperations";
 
 import "../CSS/setter.css";
 
-function DimensionSetter({ setHeight, setWidth, file, width, height }) {
-  const handleSubmit = (e) => {
+function DimensionSetter({ setHeight, setWidth, file, width, height, id }) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (file !== "") {
       const formData = new FormData();
       formData.append("image", file);
       formData.append("height", height);
       formData.append("width", width);
-      formData.append("id", uuidv4());
+      formData.append("id", id);
       PostImage(formData);
     }
   };

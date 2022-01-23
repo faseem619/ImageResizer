@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import "../CSS/dragarea.css";
 import SelectButton from "./SelectButton";
 
-function DragArea({ setHeight, setWidth, setFile, file }) {
+function DragArea({ setHeight, setWidth, setFile, file, setId }) {
   const dragArea = useRef(null);
 
   let [images, setImages] = useState([]);
@@ -25,6 +26,7 @@ function DragArea({ setHeight, setWidth, setFile, file }) {
   };
   useEffect(() => {
     if (file !== "") {
+      setId(uuidv4);
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = function () {
