@@ -2,12 +2,15 @@ package com.backend.backend;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.io.File;
+import org.hibernate.annotations.Type;
+
+
 
 import javax.persistence.Entity;
 
 
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 
@@ -19,7 +22,10 @@ public class FileDetails{
 
     @Id
     String id;
-    File image;
+
+    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
+    byte[] image;
     int width;
     int height;
 
@@ -27,12 +33,12 @@ public class FileDetails{
     }
     
 
-    public FileDetails(File image, int width, int height) {
+    public FileDetails(byte[] image, int width, int height) {
         this.image = image;
         this.width = width;
         this.height = height;
     }
-    public FileDetails(String id,File image, int width, int height) {
+    public FileDetails(String id,byte[] image, int width, int height) {
         this.id = id;
         this.image = image;
         this.width = width;
@@ -57,11 +63,11 @@ public class FileDetails{
         this.id = id;
     }
 
-    public File getImage() {
+    public byte[] getImage() {
         return this.image;
     }
 
-    public void setImage(File image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

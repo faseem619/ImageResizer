@@ -14,7 +14,7 @@ export const GetImage = async (id) => {
   console.log(id);
   const response = await fetch(`http://localhost:8080/${id}`, {
     headers: {
-      "Content-Type": "application / octet - stream",
+      "Content-Type": "application / octet-stream",
       "Content-Disposition": `attachment; filename="compressed.jpg"`,
     },
   });

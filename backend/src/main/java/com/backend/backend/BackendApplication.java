@@ -3,13 +3,11 @@ package com.backend.backend;
 
 
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 
-import javax.annotation.Resource;
-import javax.imageio.ImageIO;
 
-import java.awt.*;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +51,7 @@ public class BackendApplication {
 	@PostMapping()
 	public String PostFile(@RequestParam("image") MultipartFile image,@RequestParam("width") int width,@RequestParam("height") int height, @RequestParam("id") String id) throws IllegalStateException, IOException{
 		
-		FileDetails temp =new FileDetails(id,multipartToFile(image,"tempimage"),width,height);
+		FileDetails temp =new FileDetails(id,image.getBytes(),width,height);
 		
 		fileDetailsService.saveFile(temp);
 		return  "success";
@@ -61,25 +59,26 @@ public class BackendApplication {
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<InputStreamResource> GetFile(@PathVariable("id") String id) throws IOException{
+	public ResponseEntity<ByteArrayResource> GetFile(@PathVariable("id") String id) throws IOException{
 		FileDetails fileDetails=fileDetailsService.GetFile(id);
-		log.info(fileDetails.toString());
-		InputStreamResource resource = new InputStreamResource(new FileInputStream(fileDetails.image));
 
-		// Image image = ImageIO.read(fileDetails.image);
-		// Image compressedImage = image.getScaledInstance(fileDetails.width, fileDetails.height, Image.SCALE_SMOOTH);
+
 		HttpHeaders header = new HttpHeaders();
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=img.jpg");
         header.add("Cache-Control", "no-cache, no-store, must-revalidate");
         header.add("Pragma", "no-cache");
         header.add("Expires", "0");
-		
+		log.info(fileDetails.toString());
+
+		ByteArrayResource resource = new ByteArrayResource(fileDetails.getImage());
+
+	
 
 		return ResponseEntity.ok()
-            .headers(header)
-            .contentLength(fileDetails.image.length())
-            .contentType(MediaType.APPLICATION_OCTET_STREAM)
-            .body(resource);
+                .headers(header)
+                .contentLength(fileDetails.getImage().length)
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(resource);
 	}
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
@@ -94,7 +93,8 @@ public class BackendApplication {
     File convFile = new File(System.getProperty("java.io.tmpdir")+"/"+fileName);
     multipart.transferTo(convFile);
     return convFile;
-}
+	}
+	
 
 
 }
