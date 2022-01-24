@@ -28,22 +28,25 @@ function DragArea({ setHeight, setWidth, setFile, file, setId }) {
     dragArea.current.classList.remove("drag_area--active");
   };
 
+  const updateImage = (myFile) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(myFile);
+    reader.onload = function () {
+      setImages([...images, reader.result]);
+      let image = new Image();
+      image.src = reader.result;
+      image.onload = () => {
+        setWidth(image.width);
+        setHeight(image.height);
+      };
+    };
+  };
   // creates unique id
   // adds new image thumbnail to drag area of dropped image
   useEffect(() => {
     if (file !== "") {
       setId(uuidv4);
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function () {
-        setImages([...images, reader.result]);
-        let image = new Image();
-        image.src = reader.result;
-        image.onload = () => {
-          setWidth(image.width);
-          setHeight(image.height);
-        };
-      };
+      updateImage(file);
     }
   }, [file]);
 
@@ -66,7 +69,7 @@ function DragArea({ setHeight, setWidth, setFile, file, setId }) {
         ))}
         <i className="fas fa-image"></i>
         <p>Drop Your Image Here!</p>
-        <SelectButton />
+        <SelectButton updateImage={updateImage} setFile={setFile} />
       </div>
     </div>
   );
