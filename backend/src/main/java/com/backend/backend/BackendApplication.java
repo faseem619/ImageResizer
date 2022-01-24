@@ -60,9 +60,9 @@ public class BackendApplication {
 		// then the image is converted to a buffered image to get an output stream
 		// we obtain a byte array from the output stream to store in the DB
 		File imageFile = multipartToFile(image, "tempfile");
-		Image tobeModifiedImage = ImageIO.read(imageFile);
-		Image modifiedImage =  tobeModifiedImage.getScaledInstance(width,height,Image.SCALE_SMOOTH);
-		BufferedImage buffered = imageToBufferedImage(modifiedImage);
+		BufferedImage tobeModifiedImage = ImageIO.read(imageFile);
+
+		BufferedImage buffered =  resizeImage(tobeModifiedImage,width, height);
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		ImageIO.write(buffered, "jpg", output );
 		byte [] data = output.toByteArray();
@@ -113,15 +113,14 @@ public class BackendApplication {
     multipart.transferTo(convFile);
     return convFile;
 	}
-	//function to convert an image into a buffered image
-	public static BufferedImage imageToBufferedImage(Image im) {
-     BufferedImage bi = new BufferedImage
-        (im.getWidth(null),im.getHeight(null),BufferedImage.TYPE_INT_ARGB);
-     Graphics bg = bi.getGraphics();
-     bg.drawImage(im, 0, 0, null);
-     bg.dispose();
-     return bi;
-  }
+	
+  public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
+    BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+    Graphics2D graphics2D = resizedImage.createGraphics();
+    graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+    graphics2D.dispose();
+    return resizedImage;
+}
 
 
 }
