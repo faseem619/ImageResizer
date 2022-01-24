@@ -10,11 +10,12 @@ export const PostImage = async (data = {}) => {
   });
 };
 
+//downloads image from backend
+// id used to uniquely identify image record from db
 export const GetImage = async (id) => {
-  console.log(id);
   const response = await fetch(`http://localhost:8080/${id}`, {
     headers: {
-      "Content-Type": "application / octet-stream",
+      "Content-Type": "application / octet-stream", // important
       "Content-Disposition": `attachment; filename="compressed.jpg"`,
     },
   });

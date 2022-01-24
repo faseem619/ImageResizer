@@ -9,21 +9,27 @@ function DragArea({ setHeight, setWidth, setFile, file, setId }) {
 
   let [images, setImages] = useState([]);
 
+  //sets file state to dropped image
+  //removes the highlighted effect when hovering over with file
   const handleDrop = (e) => {
     e.preventDefault();
     dragArea.current.classList.remove("drag_area--active");
     if (e.dataTransfer.files[0].type.includes("image"))
       setFile(e.dataTransfer.files[0]);
   };
+  // adds selected coloring effect
   const handleDragOver = (e) => {
     e.preventDefault();
     dragArea.current.classList.add("drag_area--active");
   };
-
+  // removes selected coloring effect
   const handleDragLeave = (e) => {
     e.preventDefault();
     dragArea.current.classList.remove("drag_area--active");
   };
+
+  // creates unique id
+  // adds new image thumbnail to drag area of dropped image
   useEffect(() => {
     if (file !== "") {
       setId(uuidv4);

@@ -3,8 +3,19 @@ import { PostImage } from "../ApiOperations";
 
 import "../CSS/setter.css";
 
-function DimensionSetter({ setHeight, setWidth, file, width, height, id }) {
-  const handleSubmit = async (e) => {
+function DimensionSetter({
+  setHeight,
+  setWidth,
+  file,
+  width,
+  height,
+  id,
+  setDownloadVisible,
+}) {
+  // posts the image and desired dimesion to backend
+  //IFF file is uploaded to frontend
+  // makes download button visible
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (file !== "") {
       const formData = new FormData();
@@ -13,6 +24,7 @@ function DimensionSetter({ setHeight, setWidth, file, width, height, id }) {
       formData.append("width", width);
       formData.append("id", id);
       PostImage(formData);
+      setDownloadVisible(true);
     }
   };
   return (

@@ -10,6 +10,7 @@ function App() {
   const [width, setWidth] = useState("");
   const [file, setFile] = useState("");
   const [id, setId] = useState("");
+  const [downloadVisible, setDownloadVisible] = useState(false);
   return (
     <div className="App">
       <Navbar />
@@ -20,7 +21,7 @@ function App() {
         file={file}
         setId={setId}
       />
-      <Download id={id} />
+      {downloadVisible && <Download id={id} />}
       <DimensionSetter
         setHeight={setHeight}
         setWidth={setWidth}
@@ -28,8 +29,8 @@ function App() {
         width={width}
         height={height}
         id={id}
+        setDownloadVisible={setDownloadVisible}
       />
-      hello world
     </div>
   );
 }

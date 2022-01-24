@@ -2,13 +2,15 @@ import React from "react";
 import { GetImage } from "../ApiOperations";
 
 function Download({ id }) {
+  //downloads scaled image
   const handleDownload = () => {
-    console.log(id);
     GetImage(id);
   };
   return (
     <div>
-      <button onClick={handleDownload}>Download</button>{" "}
+      <button onClick={handleDownload} className="button submit_button ">
+        Download
+      </button>
     </div>
   );
 }

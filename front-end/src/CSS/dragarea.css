@@ -14,6 +14,7 @@
   align-items: center;
   row-gap: 1em;
   background-color: var(--background-color-accent);
+  margin-bottom: 1em;
 }
 .drag_area p {
   color: var(--border-color);

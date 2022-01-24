@@ -1,19 +1,12 @@
 package com.backend.backend;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import org.hibernate.annotations.Type;
 
-
-
 import javax.persistence.Entity;
-
-
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
@@ -23,7 +16,7 @@ public class FileDetails{
     @Id
     String id;
 
-    @Lob
+    @Lob //for blob and clob
     @Type(type = "org.hibernate.type.BinaryType")
     byte[] image;
     int width;
