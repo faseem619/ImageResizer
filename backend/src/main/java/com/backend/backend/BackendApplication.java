@@ -52,7 +52,7 @@ public class BackendApplication {
 	}
 	@GetMapping()
 	public String getLandingPage(){
-		return "Hello World";
+		return "Hello There. You Shouldnt be here. Go to https://image-resizer-123.netlify.app/";
 	}
 
 	//stores modified image with details into db
