@@ -67,7 +67,7 @@ function DragArea({ setHeight, setWidth, setFile, file, setId }) {
           ></img>
         )}
         <i className="fas fa-image"></i>
-        <p>Drop Your Image Here!</p>
+        <p>Drop Your Image Here!!</p>
         <SelectButton updateImage={updateImage} setFile={setFile} />
       </div>
     </div>

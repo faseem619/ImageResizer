@@ -1,5 +1,5 @@
 export const PostImage = async (data = {}) => {
-  await fetch("http://localhost:8080", {
+  await fetch("https://image-resizer-backend.herokuapp.com/", {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -13,12 +13,15 @@ export const PostImage = async (data = {}) => {
 //downloads image from backend
 // id used to uniquely identify image record from db
 export const GetImage = async (id) => {
-  const response = await fetch(`http://localhost:8080/${id}`, {
-    headers: {
-      "Content-Type": "application / octet-stream", // important
-      "Content-Disposition": `attachment; filename="compressed.jpg"`,
-    },
-  });
+  const response = await fetch(
+    `https://image-resizer-backend.herokuapp.com/${id}`,
+    {
+      headers: {
+        "Content-Type": "application / octet-stream", // important
+        "Content-Disposition": `attachment; filename="compressed.jpg"`,
+      },
+    }
+  );
   const image = await response.blob();
   let a = document.createElement("a");
   a.href = window.URL.createObjectURL(image);
