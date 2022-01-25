@@ -107,9 +107,11 @@ public class BackendApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/").allowedOrigins("https://image-resizer-123.netlify.app/");
+				registry.addMapping("/**").allowedOrigins("https://image-resizer-123.netlify.app/");
 			}
 		};
 	}
+	
 
 	//function to convert mulltipartt file (default type when sending  file over http) to normal java file type
 	public  static File multipartToFile(MultipartFile multipart, String fileName) throws IllegalStateException, IOException {
