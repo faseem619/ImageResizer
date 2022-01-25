@@ -73,7 +73,7 @@ public class BackendApplication {
 
 	}
 	// returns modified image
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "https://image-resizer-123.netlify.app/")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ByteArrayResource> GetFile(@PathVariable("id") String id) throws IOException{
 		FileDetails fileDetails=fileDetailsService.GetFile(id);
@@ -102,7 +102,7 @@ public class BackendApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/").allowedOrigins("http://localhost:3000");
+				registry.addMapping("/").allowedOrigins("https://image-resizer-123.netlify.app/");
 			}
 		};
 	}
