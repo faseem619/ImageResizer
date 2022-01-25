@@ -50,6 +50,10 @@ public class BackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
 	}
+	@GetMapping()
+	public String getLandingPage(){
+		return "Hello World";
+	}
 
 	//stores modified image with details into db
 	@PostMapping()
