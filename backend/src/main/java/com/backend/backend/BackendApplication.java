@@ -23,7 +23,6 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,9 +58,9 @@ public class BackendApplication {
 	@PostMapping()
 	public String PostFile(@RequestParam("image") MultipartFile image,@RequestParam("width") int width,@RequestParam("height") int height, @RequestParam("id") String id) throws IllegalStateException, IOException{
 		
-		// convert the multipartfile into a file, then into an image
-		// the image is then scaled to the values given
-		// then the image is converted to a buffered image to get an output stream
+		// convert the multipartfile into a file
+		// the file is convereted to a buffered image
+		// then the image is resized with the help of Graphics2d 
 		// we obtain a byte array from the output stream to store in the DB
 		File imageFile = multipartToFile(image, "tempfile");
 		BufferedImage tobeModifiedImage = ImageIO.read(imageFile);
@@ -77,7 +76,6 @@ public class BackendApplication {
 
 	}
 	// returns modified image
-	@CrossOrigin(origins = "https://image-resizer-123.netlify.app/")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ByteArrayResource> GetFile(@PathVariable("id") String id) throws IOException{
 		FileDetails fileDetails=fileDetailsService.GetFile(id);

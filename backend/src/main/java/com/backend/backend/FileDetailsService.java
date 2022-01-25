@@ -23,31 +23,33 @@ public class FileDetailsService {
     public boolean checkIfExist(String id){
         return fileDetailsRepository.findById(id).isPresent();
     }
-    public void removeRecord(String id){
-        fileDetailsRepository.deleteById(id);
-    }
+    // public void removeRecord(String id){
+    //     fileDetailsRepository.deleteById(id);
+    // }
 
     // Function not necessary as hibernate check for duplicate ids on its own
     // and updates records if values change
     //leaving for future reference
-    public boolean checkIfExistsWithSameDimensionsAndDeleteIfDimensionsDifferent(FileDetails fileDetails){
-        if(checkIfExist(fileDetails.getId())){
 
-            FileDetails  temp =fileDetailsRepository.getById(fileDetails.getId());
-            if(temp.getHeight()==fileDetails.getHeight() && temp.getWidth()==fileDetails.getWidth()){
-                return false;
-            }
+    
+    // public boolean checkIfExistsWithSameDimensionsAndDeleteIfDimensionsDifferent(FileDetails fileDetails){
+    //     if(checkIfExist(fileDetails.getId())){
+
+    //         FileDetails  temp =fileDetailsRepository.getById(fileDetails.getId());
+    //         if(temp.getHeight()==fileDetails.getHeight() && temp.getWidth()==fileDetails.getWidth()){
+    //             return false;
+    //         }
             
-            removeRecord(fileDetails.getId());
-            return true;
+    //         removeRecord(fileDetails.getId());
+    //         return true;
 
-        }
+    //     }
         
-        return true;
+    //     return true;
         
 
 
-    }
+    // }
 
     
 }
