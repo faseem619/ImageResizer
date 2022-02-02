@@ -40,7 +40,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class BackendApplication {
 
 
-	private final Logger log = LoggerFactory.getLogger("john");
+	private static final Logger log = LoggerFactory.getLogger("john");
 	private final FileDetailsService fileDetailsService;
 	@Autowired
 	public BackendApplication(FileDetailsService fileDetailsService) {
@@ -124,7 +124,8 @@ public class BackendApplication {
 	
   public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight,String imageType) throws IOException {
 	  BufferedImage resizedImage;
-	if(imageType=="image/png"){
+
+	if(imageType.equals("image/png")){
 
 		 resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
 	}
