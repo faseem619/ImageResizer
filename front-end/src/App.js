@@ -21,6 +21,8 @@ function App() {
         setFile={setFile}
         file={file}
         setId={setId}
+        setImageType={setImageType}
+        imageType={imageType}
       />
       {downloadVisible && <Download id={id} />}
       <DimensionSetter

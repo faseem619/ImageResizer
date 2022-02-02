@@ -4,7 +4,15 @@ import { v4 as uuidv4 } from "uuid";
 import "../CSS/dragarea.css";
 import SelectButton from "./SelectButton";
 
-function DragArea({ setHeight, setWidth, setFile, file, setId }) {
+function DragArea({
+  setHeight,
+  setWidth,
+  setFile,
+  file,
+  setId,
+  setImageType,
+  imageType,
+}) {
   const dragArea = useRef(null);
 
   let [images, setImages] = useState("");
@@ -14,8 +22,11 @@ function DragArea({ setHeight, setWidth, setFile, file, setId }) {
   const handleDrop = (e) => {
     e.preventDefault();
     dragArea.current.classList.remove("drag_area--active");
-    if (e.dataTransfer.files[0].type.includes("image"))
+    if (e.dataTransfer.files[0].type.includes("image")) {
       setFile(e.dataTransfer.files[0]);
+      setImageType(e.dataTransfer.files[0].type);
+      console.log(imageType);
+    }
   };
   // adds selected coloring effect
   const handleDragOver = (e) => {
