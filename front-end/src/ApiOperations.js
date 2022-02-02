@@ -23,9 +23,9 @@ export const GetImage = async (id) => {
     }
   );
   const image = await response.blob();
+  console.log(image.type);
   let a = document.createElement("a");
   a.href = window.URL.createObjectURL(image);
-  console.log(image.type);
   a.download = "picture.jpg";
   a.click();
 };
