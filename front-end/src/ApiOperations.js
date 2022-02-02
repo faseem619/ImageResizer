@@ -26,6 +26,6 @@ export const GetImage = async (id, imageType) => {
   console.log(image.type);
   let a = document.createElement("a");
   a.href = window.URL.createObjectURL(image);
-  a.download = `modifiedpicute.${imageType}`;
+  a.download = `modifiedpicuter.${imageType}`;
   a.click();
 };

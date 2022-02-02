@@ -122,9 +122,9 @@ public class BackendApplication {
     return convFile;
 	}
 	
-  public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight,String type) throws IOException {
+  public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight,String imageType) throws IOException {
 	  BufferedImage resizedImage;
-	if(type=="image/png"){
+	if(imageType=="image/png"){
 
 		 resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
 	}
