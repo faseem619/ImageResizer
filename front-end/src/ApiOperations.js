@@ -1,13 +1,17 @@
 export const PostImage = async (data = {}) => {
-  await fetch("https://image-resizer-backend.herokuapp.com/", {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    body: data,
-  });
+  await fetch(
+    // "https://image-resizer-backend.herokuapp.com/",
+    "http://localhost:8080/",
+    {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: data,
+    }
+  );
 };
 
 //downloads image from backend

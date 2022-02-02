@@ -63,12 +63,13 @@ public class BackendApplication {
 		// the file is convereted to a buffered image
 		// then the image is resized with the help of Graphics2d 
 		// we obtain a byte array from the output stream to store in the DB
-		File imageFile = multipartToFile(image, "tempfile");
+		File imageFile = multipartToFile(image, image.getOriginalFilename());
+		
 		BufferedImage tobeModifiedImage = ImageIO.read(imageFile);
 
-		BufferedImage buffered =  resizeImage(tobeModifiedImage,width, height);
+		BufferedImage buffered =  resizeImage(tobeModifiedImage,width, height,image.getContentType());
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		ImageIO.write(buffered, "jpg", output );
+		ImageIO.write(buffered, image.getContentType().split("/",2)[1], output );
 		byte [] data = output.toByteArray();
 		
 		FileDetails temp =new FileDetails(id,data,width,height);
@@ -83,7 +84,7 @@ public class BackendApplication {
 
 		// standard http headers for file transfer
 		HttpHeaders header = new HttpHeaders();
-        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=img.jpg");
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=compressed.jpg");
         header.add("Cache-Control", "no-cache, no-store, must-revalidate");
         header.add("Pragma", "no-cache");
         header.add("Expires", "0");
@@ -121,8 +122,16 @@ public class BackendApplication {
     return convFile;
 	}
 	
-  public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
-    BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
+  public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight,String type) throws IOException {
+	  BufferedImage resizedImage;
+	if(type=="image/png"){
+
+		 resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
+	}
+	else{
+
+    	 resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+	}
     Graphics2D graphics2D = resizedImage.createGraphics();
     graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
     graphics2D.dispose();
