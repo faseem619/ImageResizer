@@ -24,8 +24,7 @@ function DragArea({
     dragArea.current.classList.remove("drag_area--active");
     if (e.dataTransfer.files[0].type.includes("image")) {
       setFile(e.dataTransfer.files[0]);
-      setImageType(e.dataTransfer.files[0].type);
-      console.log(imageType);
+      setImageType(e.dataTransfer.files[0].type.split("/")[1]);
     }
   };
   // adds selected coloring effect

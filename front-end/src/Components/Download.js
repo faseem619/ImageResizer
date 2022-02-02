@@ -1,10 +1,10 @@
 import React from "react";
 import { GetImage } from "../ApiOperations";
 
-function Download({ id }) {
+function Download({ id, imageType }) {
   //downloads scaled image
   const handleDownload = () => {
-    GetImage(id);
+    GetImage(id, imageType);
   };
   return (
     <div>

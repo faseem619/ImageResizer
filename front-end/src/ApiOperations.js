@@ -12,7 +12,7 @@ export const PostImage = async (data = {}) => {
 
 //downloads image from backend
 // id used to uniquely identify image record from db
-export const GetImage = async (id) => {
+export const GetImage = async (id, imageType) => {
   const response = await fetch(
     `https://image-resizer-backend.herokuapp.com/${id}`,
     {
@@ -26,6 +26,6 @@ export const GetImage = async (id) => {
   console.log(image.type);
   let a = document.createElement("a");
   a.href = window.URL.createObjectURL(image);
-  a.download = "picture.jpg";
+  a.download = `modifiedpicute.${imageType}`;
   a.click();
 };
