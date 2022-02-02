@@ -105,7 +105,8 @@ public class BackendApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/").allowedOrigins("https://image-resizer-123.netlify.app/");
-				registry.addMapping("/**").allowedOrigins("https://image-resizer-123.netlify.app/");
+				registry.addMapping("/").allowedOrigins("*");
+				registry.addMapping("/**").allowedOrigins("*");
 			}
 		};
 	}

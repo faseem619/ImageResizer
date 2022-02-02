@@ -9,6 +9,7 @@ function App() {
   const [height, setHeight] = useState("");
   const [width, setWidth] = useState("");
   const [file, setFile] = useState("");
+  const [imageType, setImageType] = useState("");
   const [id, setId] = useState("");
   const [downloadVisible, setDownloadVisible] = useState(false);
   return (
