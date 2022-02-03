@@ -101,7 +101,7 @@ public class BackendApplication {
                 .contentType(MediaType.parseMediaType("application/octet-stream")) //important
                 .body(resource);
 	}
-	@Bean //function to apply cors to all routes in one place. cors configuration in postmapping left for future reference
+	@Bean //function to apply cors to all routes in one place.
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
@@ -115,27 +115,25 @@ public class BackendApplication {
 
 	//function to convert mulltipartt file (default type when sending  file over http) to normal java file type
 	public  static File multipartToFile(MultipartFile multipart, String fileName) throws IllegalStateException, IOException {
-    File convFile = new File(System.getProperty("java.io.tmpdir")+"/"+fileName); //stored in temp folder to avoid permission problems
-    multipart.transferTo(convFile);
-    return convFile;
+		File convFile = new File(System.getProperty("java.io.tmpdir")+"/"+fileName); //stored in temp folder to avoid permission problems
+		multipart.transferTo(convFile);
+		return convFile;
+	}
+	public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight,String imageType) throws IOException {
+		BufferedImage resizedImage;
+		if(imageType.equals("image/png"))
+			resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
+
+		else
+			resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+
+		Graphics2D graphics2D = resizedImage.createGraphics();
+		graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+		graphics2D.dispose();
+		return resizedImage;
 	}
 	
-  public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight,String imageType) throws IOException {
-	  BufferedImage resizedImage;
 
-	if(imageType.equals("image/png")){
-
-		 resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
-	}
-	else{
-
-    	 resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-	}
-    Graphics2D graphics2D = resizedImage.createGraphics();
-    graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
-    graphics2D.dispose();
-    return resizedImage;
-}
 
 
 }

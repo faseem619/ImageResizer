@@ -78,7 +78,11 @@ function DragArea({
         )}
         <i className="fas fa-image"></i>
         <p>Drop Your Image Here!!</p>
-        <SelectButton updateImage={updateImage} setFile={setFile} />
+        <SelectButton
+          updateImage={updateImage}
+          setFile={setFile}
+          setImageType={setImageType}
+        />
       </div>
     </div>
   );
